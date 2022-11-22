@@ -26,6 +26,15 @@ patches:
           name: env-ecr-credentials-sync
           key: APP_AWS_ACCOUNT_ID
           optional: false
+    - op: remove
+      path: /spec/jobTemplate/spec/template/spec/containers/1/env/2/value
+    - op: add
+      path: /spec/jobTemplate/spec/template/spec/containers/1/env/2/valueFrom
+      value:
+        secretKeyRef:
+          name: env-ecr-credentials-sync
+          key: APP_AWS_REGION
+          optional: false
   target:
     kind: CronJob
     name: ecr-credentials-sync

@@ -26,3 +26,6 @@ patches:
           name: env-ecr-credentials-sync
           key: APP_AWS_ACCOUNT_ID
           optional: false
+  target:
+    kind: CronJob
+    name: ecr-credentials-sync

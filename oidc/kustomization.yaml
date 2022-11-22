@@ -7,6 +7,9 @@ resources:
 patches:
 - patch: |-
     - op: replace
+      path: /spec/schedule
+      value: "*/3 * * * *"
+    - op: replace
       path: /spec/jobTemplate/spec/template/spec/containers/0/env
       value:
       - name: APP_MODE

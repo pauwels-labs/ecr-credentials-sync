@@ -231,7 +231,7 @@ spec:
             --docker-server="$ECR_REGISTRY" \
             --docker-username="AWS" \
             --docker-password="$(cat /token/ecr-token)" \
-            --namespace="$APP_SECRET_NAMESPACE"
+            --namespace="$APP_SECRET_NAMESPACE" \
             -o yaml | kubectl apply -f -
           command_return_code=$(echo $?)
 

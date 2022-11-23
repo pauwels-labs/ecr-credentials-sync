@@ -22,6 +22,9 @@ patches:
     - op: replace
       path: /spec/jobTemplate/spec/template/spec/containers/1/env/2/value
       value: "${ecrregion}"
+    - op: replace
+      path: /spec/jobTemplate/spec/template/spec/containers/1/env/3/value
+      value: "${secretnamespace:=\"\"}"
   target:
     kind: CronJob
     name: ecr-credentials-sync
@@ -39,6 +42,9 @@ patches:
     - op: replace
       path: /spec/template/spec/containers/1/env/2/value
       value: "${ecrregion}"
+    - op: replace
+      path: /spec/template/spec/containers/1/env/3/value
+      value: "${secretnamespace:=\"\"}"
   target:
     kind: Job
     name: ecr-credentials-sync-bootstrap

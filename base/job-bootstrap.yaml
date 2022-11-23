@@ -182,6 +182,8 @@ spec:
           value: ""
         - name: APP_AWS_REGION
           value: ""
+        - name: APP_SECRET_NAMESPACE
+          value: ""
         volumeMounts:
         - mountPath: /token
           name: token

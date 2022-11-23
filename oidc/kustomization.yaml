@@ -38,3 +38,36 @@ patches:
   target:
     kind: CronJob
     name: ecr-credentials-sync
+- patch: |-
+    - op: replace
+      path: /spec/template/spec/containers/0/env
+      value:
+      - name: APP_MODE
+        value: oidc
+    - op: add
+      path: /spec/template/spec/containers/0/envFrom
+      value:
+      - secretRef:
+          name: env-ecr-credentials-sync
+          optional: false
+    - op: remove
+      path: /spec/template/spec/containers/1/env/1/value
+    - op: add
+      path: /spec/template/spec/containers/1/env/1/valueFrom
+      value:
+        secretKeyRef:
+          name: env-ecr-credentials-sync
+          key: APP_AWS_ACCOUNT_ID
+          optional: false
+    - op: remove
+      path: /spec/template/spec/containers/1/env/2/value
+    - op: add
+      path: /spec/template/spec/containers/1/env/2/valueFrom
+      value:
+        secretKeyRef:
+          name: env-ecr-credentials-sync
+          key: APP_AWS_REGION
+          optional: false
+  target:
+    kind: Job
+    name: ecr-credentials-sync-bootstrap

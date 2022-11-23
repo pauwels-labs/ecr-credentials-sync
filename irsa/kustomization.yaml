@@ -25,5 +25,22 @@ patches:
   target:
     kind: CronJob
     name: ecr-credentials-sync
+- patch: |-
+    - op: replace
+      path: /spec/template/spec/containers/0/env
+      value:
+      - name: APP_MODE
+        value: irsa
+      - name: APP_AWS_REGION
+        value: ${ecrregion}
+    - op: replace
+      path: /spec/template/spec/containers/1/env/1/value
+      value: "${ecraccountid}"
+    - op: replace
+      path: /spec/template/spec/containers/1/env/2/value
+      value: "${ecrregion}"
+  target:
+    kind: Job
+    name: ecr-credentials-sync-bootstrap
 resources:
 - ../base

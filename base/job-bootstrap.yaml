@@ -2,6 +2,9 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: ecr-credentials-sync-bootstrap
+  annotations:
+    helm.sh/hook: post-install,post-upgrade,post-rollback
+    helm.sh/hook-delete-policy: before-hook-creation
 spec:
   template:
     spec:
@@ -228,6 +231,7 @@ spec:
             --docker-server="$ECR_REGISTRY" \
             --docker-username="AWS" \
             --docker-password="$(cat /token/ecr-token)" \
+            --namespace="$APP_SECRET_NAMESPACE"
             -o yaml | kubectl apply -f -
           command_return_code=$(echo $?)
 

@@ -27,7 +27,7 @@ patches:
       value: "${secretnamespace:=\"\"}"
   target:
     kind: CronJob
-    name: ${credentialname:=ecr}-credentials-sync
+    labelSelector: "app.kubernetes.io/instance=credentials-sync"
 - patch: |-
     - op: replace
       path: /spec/template/spec/containers/0/env
@@ -47,6 +47,6 @@ patches:
       value: "${secretnamespace:=\"\"}"
   target:
     kind: Job
-    name: ${credentialname:=ecr}-credentials-sync
+    labelSelector: "app.kubernetes.io/instance=credentials-sync"
 resources:
 - ../base

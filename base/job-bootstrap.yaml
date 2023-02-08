@@ -2,6 +2,9 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: ${credentialname:=ecr}-credentials-sync
+  labels:
+    app.kubernetes.io/instance: credentials-sync
+    app.kubernetes.io/component: ${credentialname:=ecr}
   annotations:
     helm.sh/hook: post-install,post-upgrade,post-rollback
     helm.sh/hook-delete-policy: before-hook-creation

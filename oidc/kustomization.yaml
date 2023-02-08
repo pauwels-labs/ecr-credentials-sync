@@ -2,8 +2,8 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
 - ../base
-- externalsecret-env-ecr-credentials-sync.yaml
-- secretstore-config-ecr-credentials-sync.yaml
+- externalsecret-env-credentials-sync.yaml
+- secretstore-config-credentials-sync.yaml
 patches:
 - patch: |-
     - op: replace
@@ -15,7 +15,7 @@ patches:
       path: /spec/jobTemplate/spec/template/spec/containers/0/envFrom
       value:
       - secretRef:
-          name: env-ecr-credentials-sync
+          name: "env-${credentialname:=ecr}-credentials-sync"
           optional: false
     - op: remove
       path: /spec/jobTemplate/spec/template/spec/containers/1/env/1/value
@@ -23,7 +23,7 @@ patches:
       path: /spec/jobTemplate/spec/template/spec/containers/1/env/1/valueFrom
       value:
         secretKeyRef:
-          name: env-ecr-credentials-sync
+          name: "env-${credentialname:=ecr}-credentials-sync"
           key: APP_AWS_ACCOUNT_ID
           optional: false
     - op: remove
@@ -32,12 +32,12 @@ patches:
       path: /spec/jobTemplate/spec/template/spec/containers/1/env/2/valueFrom
       value:
         secretKeyRef:
-          name: env-ecr-credentials-sync
+          name: "env-${credentialname:=ecr}-credentials-sync"
           key: APP_AWS_REGION
           optional: false
   target:
     kind: CronJob
-    name: ecr-credentials-sync
+    name: "${credentialname:=ecr}-credentials-sync"
 - patch: |-
     - op: replace
       path: /spec/template/spec/containers/0/env
@@ -48,7 +48,7 @@ patches:
       path: /spec/template/spec/containers/0/envFrom
       value:
       - secretRef:
-          name: env-ecr-credentials-sync
+          name: "env-${credentialname:=ecr}-credentials-sync"
           optional: false
     - op: remove
       path: /spec/template/spec/containers/1/env/1/value
@@ -56,7 +56,7 @@ patches:
       path: /spec/template/spec/containers/1/env/1/valueFrom
       value:
         secretKeyRef:
-          name: env-ecr-credentials-sync
+          name: "env-${credentialname:=ecr}-credentials-sync"
           key: APP_AWS_ACCOUNT_ID
           optional: false
     - op: remove
@@ -65,9 +65,9 @@ patches:
       path: /spec/template/spec/containers/1/env/2/valueFrom
       value:
         secretKeyRef:
-          name: env-ecr-credentials-sync
+          name: "env-${credentialname:=ecr}-credentials-sync"
           key: APP_AWS_REGION
           optional: false
   target:
     kind: Job
-    name: ecr-credentials-sync-bootstrap
+    name: "${credentialname:=ecr}-credentials-sync-bootstrap"

@@ -7,7 +7,7 @@ patches:
       value: ${ecriamrolearn}
   target:
     kind: ServiceAccount
-    name: ecr-credentials-sync
+    name: ${credentialname:=ecr}-credentials-sync
 - patch: |-
     - op: replace
       path: /spec/jobTemplate/spec/template/spec/containers/0/env
@@ -27,7 +27,7 @@ patches:
       value: "${secretnamespace:=\"\"}"
   target:
     kind: CronJob
-    name: ecr-credentials-sync
+    name: "${credentialname:=ecr}-credentials-sync"
 - patch: |-
     - op: replace
       path: /spec/template/spec/containers/0/env
@@ -47,6 +47,6 @@ patches:
       value: "${secretnamespace:=\"\"}"
   target:
     kind: Job
-    name: ecr-credentials-sync-bootstrap
+    name: "${credentialname:=ecr}-credentials-sync-bootstrap"
 resources:
 - ../base

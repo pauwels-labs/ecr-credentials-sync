@@ -70,4 +70,4 @@ patches:
           optional: false
   target:
     kind: Job
-    name: ecr-credentials-sync-bootstrap
+    name: ${credentialname:=ecr}-credentials-sync

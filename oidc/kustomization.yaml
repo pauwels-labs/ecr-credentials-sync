@@ -37,7 +37,7 @@ patches:
           optional: false
   target:
     kind: CronJob
-    name: ecr-credentials-sync
+    name: ${credentialname:=ecr}-credentials-sync
 - patch: |-
     - op: replace
       path: /spec/template/spec/containers/0/env

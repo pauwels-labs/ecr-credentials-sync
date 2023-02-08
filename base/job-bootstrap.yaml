@@ -240,7 +240,7 @@ spec:
           if [ "$APP_OIDC_SKIP_ECR" == "true" ]; then
             kubectl create secret generic "$APP_SECRET_NAME" \
               --dry-run=client \
-              --from-file="token=$TOKEN_FILE" \
+              --from-file="oidc-token=$TOKEN_FILE" \
               --namespace="$APP_SECRET_NAMESPACE" \
               -o yaml | kubectl apply -f -
             command_return_code=$(echo $?)

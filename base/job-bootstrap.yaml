@@ -11,7 +11,7 @@ metadata:
 spec:
   template:
     spec:
-      serviceAccountName: ecr-credentials-sync
+      serviceAccountName: "${credentialname:=ecr}-credentials-sync"
       securityContext:
         runAsUser: 1000
         runAsGroup: 1000
@@ -183,7 +183,7 @@ spec:
         imagePullPolicy: IfNotPresent
         env:
         - name: APP_SECRET_NAME
-          value: ecr-credentials
+          value: "${credentialname:=ecr}-credentials"
         - name: APP_AWS_ACCOUNT_ID
           value: ""
         - name: APP_AWS_REGION

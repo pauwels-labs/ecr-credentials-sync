@@ -70,4 +70,4 @@ patches:
           optional: false
   target:
     kind: Job
-    name: ${credentialname:=ecr}-credentials-sync
+    name: ${credentialname:=ecr22}-credentials-sync

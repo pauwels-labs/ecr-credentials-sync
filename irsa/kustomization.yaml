@@ -7,7 +7,7 @@ patches:
       value: ${ecriamrolearn}
   target:
     kind: ServiceAccount
-    name: ecr-credentials-sync
+    labelSelector: "app.kubernetes.io/instance=credentials-sync"
 - patch: |-
     - op: replace
       path: /spec/jobTemplate/spec/template/spec/containers/0/env

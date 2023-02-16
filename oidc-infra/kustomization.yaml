@@ -15,7 +15,7 @@ patches:
       path: /spec/jobTemplate/spec/template/spec/containers/0/envFrom
       value:
       - secretRef:
-          name: "env-${credentialname:=ecr}-credentials-sync"
+          name: env-${credentialname:=ecr}-credentials-sync
           optional: false
     - op: remove
       path: /spec/jobTemplate/spec/template/spec/containers/1/env/1/value
@@ -23,7 +23,7 @@ patches:
       path: /spec/jobTemplate/spec/template/spec/containers/1/env/1/valueFrom
       value:
         secretKeyRef:
-          name: "env-${credentialname:=ecr}-credentials-sync"
+          name: env-${credentialname:=ecr}-credentials-sync
           key: APP_AWS_ACCOUNT_ID
           optional: false
     - op: remove
@@ -32,7 +32,7 @@ patches:
       path: /spec/jobTemplate/spec/template/spec/containers/1/env/2/valueFrom
       value:
         secretKeyRef:
-          name: "env-${credentialname:=ecr}-credentials-sync"
+          name: env-${credentialname:=ecr}-credentials-sync
           key: APP_AWS_REGION
           optional: false
   target:
@@ -48,7 +48,7 @@ patches:
       path: /spec/template/spec/containers/0/envFrom
       value:
       - secretRef:
-          name: "env-${credentialname:=ecr}-credentials-sync"
+          name: env-${credentialname:=ecr}-credentials-sync
           optional: false
     - op: remove
       path: /spec/template/spec/containers/1/env/1/value
@@ -56,7 +56,7 @@ patches:
       path: /spec/template/spec/containers/1/env/1/valueFrom
       value:
         secretKeyRef:
-          name: "env-${credentialname:=ecr}-credentials-sync"
+          name: env-${credentialname:=ecr}-credentials-sync
           key: APP_AWS_ACCOUNT_ID
           optional: false
     - op: remove
@@ -65,9 +65,9 @@ patches:
       path: /spec/template/spec/containers/1/env/2/valueFrom
       value:
         secretKeyRef:
-          name: "env-${credentialname:=ecr}-credentials-sync"
+          name: env-${credentialname:=ecr}-credentials-sync
           key: APP_AWS_REGION
           optional: false
   target:
     kind: Job
-    name: "${credentialname:=ecr}-credentials-sync-bootstrap"
+    labelSelector: "app.kubernetes.io/instance=credentials-sync"

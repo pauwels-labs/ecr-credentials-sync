@@ -70,4 +70,4 @@ patches:
           optional: false
   target:
     kind: Job
-    name: "${credentialname:=ecr}-credentials-sync-bootstrap"
+    labelSelector: "app.kubernetes.io/instance=credentials-sync"

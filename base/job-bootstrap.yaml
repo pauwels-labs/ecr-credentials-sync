@@ -202,6 +202,8 @@ spec:
           value: ""
         - name: APP_SECRET_NAMESPACE
           value: ""
+        - name: APP_OIDC_SKIP_ECR
+          value: ""
         volumeMounts:
         - mountPath: /token
           name: token

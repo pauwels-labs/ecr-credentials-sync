@@ -35,6 +35,15 @@ patches:
           name: env-${credentialname:=ecr}-credentials-sync
           key: APP_AWS_REGION
           optional: false
+    - op: remove
+      path: /spec/template/spec/containers/1/env/4/value
+    - op: add
+      path: /spec/template/spec/containers/1/env/4/valueFrom
+      value:
+        secretKeyRef:
+          name: env-${credentialname:=ecr}-credentials-sync
+          key: APP_OIDC_SKIP_ECR
+          optional: true
   target:
     kind: CronJob
     labelSelector: "app.kubernetes.io/instance=credentials-sync"
@@ -68,6 +77,15 @@ patches:
           name: env-${credentialname:=ecr}-credentials-sync
           key: APP_AWS_REGION
           optional: false
+    - op: remove
+      path: /spec/template/spec/containers/1/env/4/value
+    - op: add
+      path: /spec/template/spec/containers/1/env/4/valueFrom
+      value:
+        secretKeyRef:
+          name: env-${credentialname:=ecr}-credentials-sync
+          key: APP_OIDC_SKIP_ECR
+          optional: true
   target:
     kind: Job
     labelSelector: "app.kubernetes.io/instance=credentials-sync"

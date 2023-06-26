@@ -4,7 +4,7 @@ metadata:
   name: "${credentialname:=ecr}-credentials-sync-bootstrap"
   labels:
     app.kubernetes.io/instance: credentials-sync
-    app.kubernetes.io/component: ${credentialname:=ecr}
+    app.kubernetes.io/component: "${credentialname:=ecr}"
   annotations:
     helm.sh/hook: post-install,post-upgrade,post-rollback
     helm.sh/hook-delete-policy: before-hook-creation
@@ -147,7 +147,7 @@ spec:
 
             if [ "$APP_OIDC_SKIP_ECR" == "true" ]; then
               echo "SKIPPING FETCH OF ECR TOKEN..."
-              echo "$OIDC_TOKEN" > /token/oidc-token
+              echo -n "$OIDC_TOKEN" > /token/oidc-token
               command_return_code="$?"
             else
               # Exchanges the OIDC token for AWS credentials to an assumed role and sets

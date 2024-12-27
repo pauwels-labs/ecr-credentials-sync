@@ -174,7 +174,7 @@ spec:
             command_return_code=1
           fi
           exit $command_return_code
-      - image: ${artifactregistryhost}/fluxcd/flux-cli:${fluxcliversion}
+      - image: "${artifactregistryhost}/fluxcd/flux-cli:${fluxcliversion}"
         name: create-secret
         resources:
           limits:
